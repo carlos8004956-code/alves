@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dia das Crianças | Sonhos e Futuro</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f0f9ff;
+    color: #1e293b;
+    line-height: 1.7;
+}
+
+header {
+    background: linear-gradient(135deg, #2563eb, #9333ea, #ec4899);
+    color: white;
+    text-align: center;
+    padding: 65px 20px;
+}
+
+header h1 {
+    font-size: clamp(32px, 6vw, 55px);
+    margin-bottom: 15px;
+}
+
+header p {
+    font-size: 18px;
+}
+
+nav {
+    background: #172554;
+    padding: 15px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #f9a8d4;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 35px 20px;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    margin-bottom: 25px;
+    border-radius: 18px;
+    box-shadow: 0 5px 18px #0000000d;
+    border-left: 6px solid #8b5cf6;
+}
+
+.card h2 {
+    color: #6d28d9;
+    margin-bottom: 12px;
+}
+
+.card p {
+    margin-bottom: 12px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.bom {
+    border-left-color: #22c55e;
+}
+
+.bom h2 {
+    color: #15803d;
+}
+
+.ruim {
+    border-left-color: #f97316;
+}
+
+.ruim h2 {
+    color: #c2410c;
+}
+
+.futuro {
+    background: linear-gradient(135deg, #172554, #6d28d9);
+    color: white;
+    border: none;
+}
+
+.futuro h2 {
+    color: #facc15;
+}
+
+.destaque {
+    text-align: center;
+    padding: 30px;
+    background: #fce7f3;
+    border-radius: 18px;
+    margin-top: 25px;
+}
+
+button {
+    background: #7c3aed;
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #5b21b6;
+    transform: translateY(-2px);
+}
+
+#mensagem {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #6d28d9;
+}
+
+footer {
+    background: #172554;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 35px;
+}
+
+@media(max-width: 600px) {
+    nav a {
+        display: inline-block;
+        margin: 5px;
+        font-size: 14px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🎈 Dia das Crianças 🎮</h1>
+    <p>Infância, liberdade, aprendizados e sonhos para o futuro!</p>
+</header>
+
+<nav>
+    <a href="#dia">A data</a>
+    <a href="#casa">Ficar em casa</a>
+    <a href="#futuro">Meu futuro</a>
+</nav>
+
+<main class="container">
+
+    <section class="card" id="dia">
+        <h2>🎁 O que significa o Dia das Crianças?</h2>
+
+        <p>
+            O Dia das Crianças é comemorado no Brasil em 12 de outubro.
+            É uma data especial para lembrar que toda criança merece
+            carinho, respeito, proteção, educação, brincadeiras e
+            oportunidades para crescer feliz.
+        </p>
+
+        <p>
+            A infância é uma fase de descobertas. É quando aprendemos
+            coisas novas, construímos amizades, convivemos com a família
+            e começamos a imaginar o que queremos ser no futuro.
+        </p>
+
+        <p>
+            Para mim, essa data também é uma oportunidade de pensar
+            na vida, valorizar os momentos bons e criar objetivos
+            para que o próximo ano seja melhor.
+        </p>
+    </section>
+
+    <section class="card" id="casa">
+        <h2>🏠 Como é ficar sozinho em casa?</h2>
+
+        <p>
+            Ficar em casa sozinho pode ter momentos bons, mas também
+            pode trazer dificuldades. Tudo depende da situação,
+            da idade e de ter alguém responsável disponível para ajudar.
+        </p>
+
+        <div class="grid">
+
+            <article class="card bom">
+                <h2>😊 Os lados bons</h2>
+
+                <p>
+                    Em casa, posso ter mais tranquilidade para estudar,
+                    assistir a vídeos, jogar, ouvir música e organizar
+                    minhas coisas.
+                </p>
+
+                <p>
+                    Também posso aprender a cuidar dos meus materiais,
+                    cumprir minhas tarefas e desenvolver responsabilidade.
+                </p>
+            </article>
+
+            <article class="card ruim">
+                <h2>😕 Os lados ruins</h2>
+
+                <p>
+                    Às vezes, ficar sozinho pode ser entediante,
+                    principalmente quando não temos ninguém para
+                    conversar, brincar ou compartilhar os momentos.
+                </p>
+
+                <p>
+                    Também podem surgir sentimentos de solidão ou
+                    insegurança, além de situações em que precisamos
+                    da ajuda de um adulto.
+                </p>
+            </article>
+
+        </div>
+
+        <div class="destaque">
+            <h2>💙 O que realmente importa?</h2>
+
+            <p>
+                Ter momentos de independência é bom, mas também
+                precisamos de companhia, amizade, carinho e apoio.
+                Crianças e adolescentes devem ficar sozinhos apenas
+                quando isso for seguro e adequado, com um adulto
+                responsável disponível para ajudar.
+            </p>
+        </div>
+    </section>
+
+    <section class="card futuro" id="futuro">
+        <h2>🚀 Meu objetivo para o ano que vem</h2>
+
+        <p>
+            Eu quero que o próximo ano seja bem diferente. Quero
+            aprender coisas novas, amadurecer, ter mais responsabilidade
+            e conquistar oportunidades que me ajudem a crescer.
+        </p>
+
+        <p>
+            Um dos meus principais objetivos é estar trabalhando
+            no ano que vem. Quero conquistar meu próprio dinheiro,
+            aprender como funciona o mundo do trabalho e começar
+            a construir meu futuro.
+        </p>
+
+        <p>
+            Sei que, para conseguir isso, preciso me dedicar aos
+            estudos, desenvolver minhas habilidades e procurar
+            oportunidades adequadas à minha idade, respeitando
+            as regras de trabalho para adolescentes.
+        </p>
+
+        <p>
+            Quero olhar para trás e perceber que evoluí, aprendi
+            mais e dei passos importantes para realizar meus sonhos.
+            Não espero que tudo seja fácil, mas quero fazer a minha
+            parte para que o próximo ano seja melhor.
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>🌟 Uma mensagem para o futuro</h2>
+
+        <p>
+            O Dia das Crianças também me faz pensar que crescer
+            significa aprender a ter responsabilidades sem deixar
+            de valorizar a felicidade, as amizades e os bons momentos.
+        </p>
+
+        <p>
+            Meu desejo é que o próximo ano traga novas oportunidades,
+            experiências positivas e conquistas. Quero continuar
+            aprendendo, me esforçando e construindo, aos poucos,
+            o futuro que imagino para mim.
+        </p>
+
+        <p><strong>
+            Cada novo ano é uma oportunidade de recomeçar,
+            aprender e chegar mais perto dos nossos objetivos!
+        </strong></p>
+
+        <button onclick="mostrarMensagem()">
+            ✨ Minha mensagem para o futuro
+        </button>
+
+        <p id="mensagem"></p>
+    </section>
+
+</main>
+
+<footer>
+    <p>🎈 Dia das Crianças — Sonhos, aprendizado e novas conquistas.</p>
+    <p>Feito com dedicação para o meu futuro! 💙</p>
+</footer>
+
+<script>
+function mostrarMensagem() {
+    document.getElementById("mensagem").textContent =
+        "Meu próximo ano será uma nova oportunidade para aprender, " +
+        "crescer, buscar um trabalho adequado à minha idade e " +
+        "realizar meus sonhos. Vou continuar me esforçando! 🚀";
+}
+</script>
+
+</body>
+</html>
