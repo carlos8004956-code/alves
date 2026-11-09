@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educação Financeira | Ferramenta de Controle Orçamentário</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        .topbar {
+            background: #0f172a;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+        .logo { font-weight: 700; font-size: 1.15rem; letter-spacing: -0.3px; }
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 80px 40px 70px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 680px;
+            margin: 0 auto;
+            color: #cbd5e1;
+        }
+        .container {
+            max-width: 1000px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 36px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 24px;
+        }
+        h2 {
+            color: #0f172a;
+            font-size: 1.45rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .full { grid-column: 1 / -1; }
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #334155;
+            font-size: 0.95rem;
+        }
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+        }
+        .result {
+            background: #f1f5f9;
+            border-radius: 10px;
+            padding: 28px;
+            text-align: center;
+            margin-top: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        .result-label {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 6px;
+        }
+        .result-value {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .result-value.positive { color: #059669; }
+        .result-value.negative { color: #dc2626; }
+        .status {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: #475569;
+        }
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+        button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .btn-clear {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+        .btn-clear:hover { background: #e2e8f0; }
+        .save-indicator {
+            font-size: 0.85rem;
+            color: #059669;
+            text-align: right;
+            margin-top: 8px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .save-indicator.show { opacity: 1; }
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .benefit {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .benefit h3 {
+            font-size: 1.05rem;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+        .benefit p { font-size: 0.92rem; color: #475569; }
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 20px;
+        }
+        @media (max-width: 700px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2rem; }
+            .topbar { padding: 16px 20px; }
+            .hero { padding: 60px 20px; }
+            .card { padding: 28px 20px; }
+            .actions { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="logo">Educação Financeira</div>
+        <div>Ferramenta de Gestão Pessoal</div>
+    </div>
+
+    <div class="hero">
+        <h1>Controle Orçamentário Pessoal</h1>
+        <p>Ferramenta simples e objetiva para acompanhamento de receitas, despesas e saldo disponível. Os dados ficam salvos no seu navegador.</p>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Simulação de Orçamento</h2>
+            <div class="form-grid">
+                <div class="full">
+                    <label for="receita">Valor disponível / Receita (R$)</label>
+                    <input type="number" id="receita" placeholder="0,00" min="0" step="0.01">
+                </div>
+                <div>
+                    <label for="alimentacao">Alimentação (R$)</label>
+                    <input type="number" class="despesa" data-key="alimentacao" placeholder="0,00" min="0" step="0.01">
+                </div>
+                <div>
+                    <label for="transporte">Transporte (R$)</label>
+                    <input type="number" class="despesa" data-key="transporte" placeholder="0,00" min="0" step="0.01">
+                </div>
+                <div>
+                    <label for="lazer">Lazer e Entretenimento (R$)</label>
+                    <input type="number" class="despesa" data-key="lazer" placeholder="0,00" min="0" step="0.01">
+                </div>
+                <div>
+                    <label for="outros">Outras Despesas (R$)</label>
+                    <input type="number" class="despesa" data-key="outros" placeholder="0,00" min="0" step="0.01">
+                </div>
+            </div>
+
+            <div class="result" id="resultado">
+                <div class="result-label">Saldo Disponível</div>
+                <div class="result-value" id="saldo">R$ 0,00</div>
+                <div class="status" id="status">Informe os valores para calcular</div>
+            </div>
+
+            <div class="save-indicator" id="saveIndicator">Dados salvos automaticamente</div>
+
+            <div class="actions">
+                <button class="btn-clear" id="btnLimpar">Limpar dados</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Benefícios do Controle Financeiro</h2>
+            <div class="benefits">
+                <div class="benefit">
+                    <h3>Visão Clara</h3>
+                    <p>Compreensão objetiva de entradas e saídas de recursos.</p>
+                </div>
+                <div class="benefit">
+                    <h3>Tomada de Decisão</h3>
+                    <p>Base de dados para decisões mais conscientes e planejadas.</p>
+                </div>
+                <div class="benefit">
+                    <h3>Prevenção de Desequilíbrio</h3>
+                    <p>Identificação antecipada de gastos acima da capacidade.</p>
+                </div>
+                <div class="benefit">
+                    <h3>Formação de Hábito</h3>
+                    <p>Desenvolvimento de disciplina financeira de forma contínua.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card">
+            <h2>Tabela Educativa de Investimentos</h2>
+            <p style="margin-bottom: 20px; color: #475569;">Conheça algumas opções comuns de investimento no Brasil. Esta tabela é apenas educativa e não constitui recomendação de investimento.</p>
+            
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
+                    <thead>
+                        <tr style="background: #f1f5f9; text-align: left;">
+                            <th style="padding: 12px 14px; border-bottom: 2px solid #e2e8f0; color: #0f172a;">Investimento</th>
+                            <th style="padding: 12px 14px; border-bottom: 2px solid #e2e8f0; color: #0f172a;">Risco</th>
+                            <th style="padding: 12px 14px; border-bottom: 2px solid #e2e8f0; color: #0f172a;">Liquidez</th>
+                            <th style="padding: 12px 14px; border-bottom: 2px solid #e2e8f0; color: #0f172a;">Para quem é indicado</th>
+                            <th style="padding: 12px 14px; border-bottom: 2px solid #e2e8f0; color: #0f172a;">Observação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;"><strong>Poupança</strong></td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Muito baixo</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Alta</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Iniciantes / Reserva de emergência</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Rendimento baixo, mas seguro e fácil</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;"><strong>Tesouro Direto</strong></td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Baixo</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Média a Alta</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Quem quer começar a investir com segurança</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Títulos do governo, considerado seguro</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;"><strong>CDB</strong></td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Baixo</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Média</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Quem busca rendimento melhor que a poupança</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Protegido pelo FGC até R$ 250 mil</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;"><strong>Fundos de Renda Fixa</strong></td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Baixo a Médio</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Média</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Quem prefere gestão profissional</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Tem taxa de administração</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;"><strong>Ações</strong></td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Alto</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Alta</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Quem já tem conhecimento e aceita risco</td>
+                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Pode oscilar bastante no curto prazo</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 14px;"><strong>Fundos Imobiliários (FIIs)</strong></td>
+                            <td style="padding: 12px 14px;">Médio</td>
+                            <td style="padding: 12px 14px;">Alta</td>
+                            <td style="padding: 12px 14px;">Quem busca renda passiva</td>
+                            <td style="padding: 12px 14px;">Distribuem rendimentos mensais</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top: 16px; font-size: 0.9rem; color: #64748b;">
+                <strong>Importante:</strong> Antes de investir, estude, entenda os riscos e, se possível, converse com alguém de confiança ou um profissional. Esta tabela é apenas informativa.
+            </p>
+        </div>
+
+    <footer>
+        Ferramenta educacional de gestão financeira pessoal • Dados salvos localmente no navegador • 2026
+    </footer>
+
+    <script>
+        const receitaInput = document.getElementById('receita');
+        const despesas = document.querySelectorAll('.despesa');
+        const saldoEl = document.getElementById('saldo');
+        const statusEl = document.getElementById('status');
+        const saveIndicator = document.getElementById('saveIndicator');
+        const btnLimpar = document.getElementById('btnLimpar');
+
+        const STORAGE_KEY = 'educacaoFinanceiraDados';
+
+        function salvarDados() {
+            const dados = {
+                receita: receitaInput.value,
+                despesas: {}
+            };
+            despesas.forEach(d => {
+                dados.despesas[d.dataset.key] = d.value;
+            });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
+            mostrarIndicadorSalvo();
+        }
+
+        function carregarDados() {
+            const salvo = localStorage.getItem(STORAGE_KEY);
+            if (!salvo) return;
+
+            try {
+                const dados = JSON.parse(salvo);
+                if (dados.receita) receitaInput.value = dados.receita;
+                despesas.forEach(d => {
+                    if (dados.despesas && dados.despesas[d.dataset.key]) {
+                        d.value = dados.despesas[d.dataset.key];
+                    }
+                });
+                calcular();
+            } catch (e) {
+                console.error('Erro ao carregar dados');
+            }
+        }
+
+        function mostrarIndicadorSalvo() {
+            saveIndicator.classList.add('show');
+            setTimeout(() => saveIndicator.classList.remove('show'), 1500);
+        }
+
+        function calcular() {
+            const receita = parseFloat(receitaInput.value) || 0;
+            let totalDespesas = 0;
+
+            despesas.forEach(d => {
+                totalDespesas += parseFloat(d.value) || 0;
+            });
+
+            const saldo = receita - totalDespesas;
+
+            saldoEl.textContent = saldo.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+
+            saldoEl.classList.remove('positive', 'negative');
+            if (saldo > 0) {
+                saldoEl.classList.add('positive');
+                statusEl.textContent = 'Saldo positivo. Há margem para reserva ou investimento.';
+            } else if (saldo < 0) {
+                saldoEl.classList.add('negative');
+                statusEl.textContent = 'Atenção: despesas superiores aos recursos disponíveis.';
+            } else {
+                statusEl.textContent = 'Saldo zerado. Despesas equivalentes aos recursos.';
+            }
+
+            if (receita === 0 && totalDespesas === 0) {
+                statusEl.textContent = 'Informe os valores para calcular';
+            }
+
+            salvarDados();
+        }
+
+        function limparDados() {
+            if (confirm('Deseja apagar todos os dados salvos?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                receitaInput.value = '';
+                despesas.forEach(d => d.value = '');
+                calcular();
+            }
+        }
+
+        receitaInput.addEventListener('input', calcular);
+        despesas.forEach(d => d.addEventListener('input', calcular));
+        btnLimpar.addEventListener('click', limparDados);
+
+        // Carrega os dados ao abrir a página
+        carregarDados();
+    </script>
+</body>
+</html>
