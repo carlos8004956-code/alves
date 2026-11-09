@@ -130,15 +130,6 @@
             border: 1px solid #e2e8f0;
         }
         .btn-clear:hover { background: #e2e8f0; }
-        .save-indicator {
-            font-size: 0.85rem;
-            color: #059669;
-            text-align: right;
-            margin-top: 8px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .save-indicator.show { opacity: 1; }
         .benefits {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -182,7 +173,7 @@
 
     <div class="hero">
         <h1>Controle Orçamentário Pessoal</h1>
-        <p>Ferramenta simples e objetiva para acompanhamento de receitas, despesas e saldo disponível. Os dados ficam salvos no seu navegador.</p>
+        <p>Ferramenta simples e objetiva para acompanhamento de receitas, despesas e saldo disponível.</p>
     </div>
 
     <div class="container">
@@ -194,33 +185,31 @@
                     <input type="number" id="receita" placeholder="0,00" min="0" step="0.01">
                 </div>
                 <div>
-                    <label for="alimentacao">Alimentação (R$)</label>
-                    <input type="number" class="despesa" data-key="alimentacao" placeholder="0,00" min="0" step="0.01">
+                    <label>Alimentação (R$)</label>
+                    <input type="number" class="despesa" placeholder="0,00" min="0" step="0.01">
                 </div>
                 <div>
-                    <label for="transporte">Transporte (R$)</label>
-                    <input type="number" class="despesa" data-key="transporte" placeholder="0,00" min="0" step="0.01">
+                    <label>Transporte (R$)</label>
+                    <input type="number" class="despesa" placeholder="0,00" min="0" step="0.01">
                 </div>
                 <div>
-                    <label for="lazer">Lazer e Entretenimento (R$)</label>
-                    <input type="number" class="despesa" data-key="lazer" placeholder="0,00" min="0" step="0.01">
+                    <label>Lazer e Entretenimento (R$)</label>
+                    <input type="number" class="despesa" placeholder="0,00" min="0" step="0.01">
                 </div>
                 <div>
-                    <label for="outros">Outras Despesas (R$)</label>
-                    <input type="number" class="despesa" data-key="outros" placeholder="0,00" min="0" step="0.01">
+                    <label>Outras Despesas (R$)</label>
+                    <input type="number" class="despesa" placeholder="0,00" min="0" step="0.01">
                 </div>
             </div>
 
-            <div class="result" id="resultado">
+            <div class="result">
                 <div class="result-label">Saldo Disponível</div>
                 <div class="result-value" id="saldo">R$ 0,00</div>
                 <div class="status" id="status">Informe os valores para calcular</div>
             </div>
 
-            <div class="save-indicator" id="saveIndicator">Dados salvos automaticamente</div>
-
             <div class="actions">
-                <button class="btn-clear" id="btnLimpar">Limpar dados</button>
+                <button class="btn-clear" id="btnLimpar">Limpar</button>
             </div>
         </div>
 
@@ -247,7 +236,7 @@
         </div>
     </div>
 
-    
+    <div class="container">
         <div class="card">
             <h2>Tabela Educativa de Investimentos</h2>
             <p style="margin-bottom: 20px; color: #475569;">Conheça algumas opções comuns de investimento no Brasil. Esta tabela é apenas educativa e não constitui recomendação de investimento.</p>
@@ -313,9 +302,10 @@
                 <strong>Importante:</strong> Antes de investir, estude, entenda os riscos e, se possível, converse com alguém de confiança ou um profissional. Esta tabela é apenas informativa.
             </p>
         </div>
+    </div>
 
     <footer>
-        Ferramenta educacional de gestão financeira pessoal • Dados salvos localmente no navegador • 2026
+        Ferramenta educacional de gestão financeira pessoal • 2026
     </footer>
 
     <script>
@@ -323,45 +313,7 @@
         const despesas = document.querySelectorAll('.despesa');
         const saldoEl = document.getElementById('saldo');
         const statusEl = document.getElementById('status');
-        const saveIndicator = document.getElementById('saveIndicator');
         const btnLimpar = document.getElementById('btnLimpar');
-
-        const STORAGE_KEY = 'educacaoFinanceiraDados';
-
-        function salvarDados() {
-            const dados = {
-                receita: receitaInput.value,
-                despesas: {}
-            };
-            despesas.forEach(d => {
-                dados.despesas[d.dataset.key] = d.value;
-            });
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
-            mostrarIndicadorSalvo();
-        }
-
-        function carregarDados() {
-            const salvo = localStorage.getItem(STORAGE_KEY);
-            if (!salvo) return;
-
-            try {
-                const dados = JSON.parse(salvo);
-                if (dados.receita) receitaInput.value = dados.receita;
-                despesas.forEach(d => {
-                    if (dados.despesas && dados.despesas[d.dataset.key]) {
-                        d.value = dados.despesas[d.dataset.key];
-                    }
-                });
-                calcular();
-            } catch (e) {
-                console.error('Erro ao carregar dados');
-            }
-        }
-
-        function mostrarIndicadorSalvo() {
-            saveIndicator.classList.add('show');
-            setTimeout(() => saveIndicator.classList.remove('show'), 1500);
-        }
 
         function calcular() {
             const receita = parseFloat(receitaInput.value) || 0;
@@ -392,25 +344,17 @@
             if (receita === 0 && totalDespesas === 0) {
                 statusEl.textContent = 'Informe os valores para calcular';
             }
-
-            salvarDados();
         }
 
-        function limparDados() {
-            if (confirm('Deseja apagar todos os dados salvos?')) {
-                localStorage.removeItem(STORAGE_KEY);
-                receitaInput.value = '';
-                despesas.forEach(d => d.value = '');
-                calcular();
-            }
+        function limpar() {
+            receitaInput.value = '';
+            despesas.forEach(d => d.value = '');
+            calcular();
         }
 
         receitaInput.addEventListener('input', calcular);
         despesas.forEach(d => d.addEventListener('input', calcular));
-        btnLimpar.addEventListener('click', limparDados);
-
-        // Carrega os dados ao abrir a página
-        carregarDados();
+        btnLimpar.addEventListener('click', limpar);
     </script>
 </body>
 </html>
