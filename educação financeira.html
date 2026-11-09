@@ -1,360 +1,469 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educação Financeira | Ferramenta de Controle Orçamentário</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
-            background: #f8fafc;
-            color: #1e293b;
-            line-height: 1.6;
-        }
-        .topbar {
-            background: #0f172a;
-            color: white;
-            padding: 18px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.95rem;
-        }
-        .logo { font-weight: 700; font-size: 1.15rem; letter-spacing: -0.3px; }
-        .hero {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: white;
-            padding: 80px 40px 70px;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 2.6rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
-        }
-        .hero p {
-            font-size: 1.15rem;
-            max-width: 680px;
-            margin: 0 auto;
-            color: #cbd5e1;
-        }
-        .container {
-            max-width: 1000px;
-            margin: -40px auto 60px;
-            padding: 0 20px;
-        }
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 36px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            border: 1px solid #e2e8f0;
-            margin-bottom: 24px;
-        }
-        h2 {
-            color: #0f172a;
-            font-size: 1.45rem;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        .full { grid-column: 1 / -1; }
-        label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 6px;
-            color: #334155;
-            font-size: 0.95rem;
-        }
-        input {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-        input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
-        }
-        .result {
-            background: #f1f5f9;
-            border-radius: 10px;
-            padding: 28px;
-            text-align: center;
-            margin-top: 10px;
-            border: 1px solid #e2e8f0;
-        }
-        .result-label {
-            font-size: 0.95rem;
-            color: #64748b;
-            margin-bottom: 6px;
-        }
-        .result-value {
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: #0f172a;
-        }
-        .result-value.positive { color: #059669; }
-        .result-value.negative { color: #dc2626; }
-        .status {
-            margin-top: 10px;
-            font-size: 0.95rem;
-            color: #475569;
-        }
-        .actions {
-            margin-top: 20px;
-            display: flex;
-            gap: 12px;
-            justify-content: flex-end;
-        }
-        button {
-            padding: 10px 18px;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        .btn-clear {
-            background: #f1f5f9;
-            color: #475569;
-            border: 1px solid #e2e8f0;
-        }
-        .btn-clear:hover { background: #e2e8f0; }
-        .benefits {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-        }
-        .benefit {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-        }
-        .benefit h3 {
-            font-size: 1.05rem;
-            color: #0f172a;
-            margin-bottom: 8px;
-        }
-        .benefit p { font-size: 0.92rem; color: #475569; }
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #64748b;
-            font-size: 0.9rem;
-            border-top: 1px solid #e2e8f0;
-            margin-top: 20px;
-        }
-        @media (max-width: 700px) {
-            .form-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2rem; }
-            .topbar { padding: 16px 20px; }
-            .hero { padding: 60px 20px; }
-            .card { padding: 28px 20px; }
-            .actions { justify-content: center; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minha Educação Financeira</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+header {
+    background: linear-gradient(135deg, #064e3b, #059669);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #d1fae5;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 15px #0000000d;
+}
+
+h2 {
+    margin-bottom: 18px;
+    color: #065f46;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #059669;
+}
+
+button {
+    padding: 13px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #059669;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #047857;
+    transform: translateY(-1px);
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.info {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #0000000a;
+}
+
+.info p {
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+.info h3 {
+    font-size: 25px;
+}
+
+.dinheiro { color: #059669; }
+.gasto { color: #dc2626; }
+.sobra { color: #2563eb; }
+
+.lista {
+    margin-top: 15px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.item span {
+    font-weight: bold;
+}
+
+.excluir {
+    background: #dc2626;
+    padding: 8px 12px;
+}
+
+.excluir:hover {
+    background: #b91c1c;
+}
+
+.mensagem {
+    margin-top: 18px;
+    padding: 15px;
+    background: #ecfdf5;
+    color: #065f46;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.alerta {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.vazio {
+    color: #64748b;
+    padding: 15px 0;
+}
+
+.limpar {
+    background: #475569;
+    margin-top: 15px;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #64748b;
+}
+
+@media(max-width: 650px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .item {
+        flex-wrap: wrap;
+    }
+}
+</style>
 </head>
+
 <body>
-    <div class="topbar">
-        <div class="logo">Educação Financeira</div>
-        <div>Ferramenta de Gestão Pessoal</div>
+
+<header>
+    <h1>💰 Minha Educação Financeira</h1>
+    <p>Aprenda a controlar seu dinheiro e organizar seus gastos!</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>1. Quanto dinheiro você tem?</h2>
+
+        <label for="dinheiro">Informe seu dinheiro disponível (R$)</label>
+
+        <input type="number" id="dinheiro"
+        placeholder="Ex: 500,00" min="0" step="0.01">
+
+        <button onclick="definirDinheiro()">
+            Registrar meu dinheiro
+        </button>
     </div>
 
-    <div class="hero">
-        <h1>Controle Orçamentário Pessoal</h1>
-        <p>Ferramenta simples e objetiva para acompanhamento de receitas, despesas e saldo disponível.</p>
-    </div>
+    <div class="cards">
 
-    <div class="container">
-        <div class="card">
-            <h2>Simulação de Orçamento</h2>
-            <div class="form-grid">
-                <div class="full">
-                    <label for="receita">Valor disponível / Receita (R$)</label>
-                    <input type="number" id="receita" placeholder="0,00" min="0" step="0.01">
-                </div>
-                <div>
-                    <label>Alimentação (R$)</label>
-                    <input type="number" class="despesa" placeholder="0,00" min="0" step="0.01">
-                </div>
-                <div>
-                    <label>Transporte (R$)</label>
-                    <input type="number" class="despesa" placeholder="0,00" min="0" step="0.01">
-                </div>
-                <div>
-                    <label>Lazer e Entretenimento (R$)</label>
-                    <input type="number" class="despesa" placeholder="0,00" min="0" step="0.01">
-                </div>
-                <div>
-                    <label>Outras Despesas (R$)</label>
-                    <input type="number" class="despesa" placeholder="0,00" min="0" step="0.01">
-                </div>
-            </div>
-
-            <div class="result">
-                <div class="result-label">Saldo Disponível</div>
-                <div class="result-value" id="saldo">R$ 0,00</div>
-                <div class="status" id="status">Informe os valores para calcular</div>
-            </div>
-
-            <div class="actions">
-                <button class="btn-clear" id="btnLimpar">Limpar</button>
-            </div>
+        <div class="info">
+            <p>💵 Dinheiro disponível</p>
+            <h3 class="dinheiro" id="totalDinheiro">R$ 0,00</h3>
         </div>
 
-        <div class="card">
-            <h2>Benefícios do Controle Financeiro</h2>
-            <div class="benefits">
-                <div class="benefit">
-                    <h3>Visão Clara</h3>
-                    <p>Compreensão objetiva de entradas e saídas de recursos.</p>
-                </div>
-                <div class="benefit">
-                    <h3>Tomada de Decisão</h3>
-                    <p>Base de dados para decisões mais conscientes e planejadas.</p>
-                </div>
-                <div class="benefit">
-                    <h3>Prevenção de Desequilíbrio</h3>
-                    <p>Identificação antecipada de gastos acima da capacidade.</p>
-                </div>
-                <div class="benefit">
-                    <h3>Formação de Hábito</h3>
-                    <p>Desenvolvimento de disciplina financeira de forma contínua.</p>
-                </div>
-            </div>
+        <div class="info">
+            <p>🛒 Total de gastos</p>
+            <h3 class="gasto" id="totalGastos">R$ 0,00</h3>
         </div>
+
+        <div class="info">
+            <p>💚 Dinheiro que sobrou</p>
+            <h3 class="sobra" id="saldo">R$ 0,00</h3>
+        </div>
+
     </div>
 
-    <div class="container">
-        <div class="card">
-            <h2>Tabela Educativa de Investimentos</h2>
-            <p style="margin-bottom: 20px; color: #475569;">Conheça algumas opções comuns de investimento no Brasil. Esta tabela é apenas educativa e não constitui recomendação de investimento.</p>
-            
-            <div style="overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
-                    <thead>
-                        <tr style="background: #f1f5f9; text-align: left;">
-                            <th style="padding: 12px 14px; border-bottom: 2px solid #e2e8f0; color: #0f172a;">Investimento</th>
-                            <th style="padding: 12px 14px; border-bottom: 2px solid #e2e8f0; color: #0f172a;">Risco</th>
-                            <th style="padding: 12px 14px; border-bottom: 2px solid #e2e8f0; color: #0f172a;">Liquidez</th>
-                            <th style="padding: 12px 14px; border-bottom: 2px solid #e2e8f0; color: #0f172a;">Para quem é indicado</th>
-                            <th style="padding: 12px 14px; border-bottom: 2px solid #e2e8f0; color: #0f172a;">Observação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;"><strong>Poupança</strong></td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Muito baixo</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Alta</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Iniciantes / Reserva de emergência</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Rendimento baixo, mas seguro e fácil</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;"><strong>Tesouro Direto</strong></td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Baixo</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Média a Alta</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Quem quer começar a investir com segurança</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Títulos do governo, considerado seguro</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;"><strong>CDB</strong></td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Baixo</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Média</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Quem busca rendimento melhor que a poupança</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Protegido pelo FGC até R$ 250 mil</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;"><strong>Fundos de Renda Fixa</strong></td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Baixo a Médio</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Média</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Quem prefere gestão profissional</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Tem taxa de administração</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;"><strong>Ações</strong></td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Alto</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Alta</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Quem já tem conhecimento e aceita risco</td>
-                            <td style="padding: 12px 14px; border-bottom: 1px solid #e2e8f0;">Pode oscilar bastante no curto prazo</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 12px 14px;"><strong>Fundos Imobiliários (FIIs)</strong></td>
-                            <td style="padding: 12px 14px;">Médio</td>
-                            <td style="padding: 12px 14px;">Alta</td>
-                            <td style="padding: 12px 14px;">Quem busca renda passiva</td>
-                            <td style="padding: 12px 14px;">Distribuem rendimentos mensais</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p style="margin-top: 16px; font-size: 0.9rem; color: #64748b;">
-                <strong>Importante:</strong> Antes de investir, estude, entenda os riscos e, se possível, converse com alguém de confiança ou um profissional. Esta tabela é apenas informativa.
-            </p>
-        </div>
+    <div class="card">
+        <h2>2. Registre seus gastos</h2>
+
+        <label for="nomeGasto">O que você comprou?</label>
+        <input type="text" id="nomeGasto"
+        placeholder="Ex: Lanche, roupa, transporte...">
+
+        <label for="valorGasto">Quanto você gastou? (R$)</label>
+        <input type="number" id="valorGasto"
+        placeholder="Ex: 25,00" min="0" step="0.01">
+
+        <button onclick="adicionarGasto()">
+            + Adicionar gasto
+        </button>
     </div>
 
-    <footer>
-        Ferramenta educacional de gestão financeira pessoal • 2026
-    </footer>
+    <div class="card">
+        <h2>3. Histórico dos seus gastos</h2>
 
-    <script>
-        const receitaInput = document.getElementById('receita');
-        const despesas = document.querySelectorAll('.despesa');
-        const saldoEl = document.getElementById('saldo');
-        const statusEl = document.getElementById('status');
-        const btnLimpar = document.getElementById('btnLimpar');
+        <div class="lista" id="listaGastos">
+            <p class="vazio">Nenhum gasto registrado ainda.</p>
+        </div>
 
-        function calcular() {
-            const receita = parseFloat(receitaInput.value) || 0;
-            let totalDespesas = 0;
+        <div class="mensagem" id="mensagem">
+            Informe quanto dinheiro você tem para começar.
+        </div>
 
-            despesas.forEach(d => {
-                totalDespesas += parseFloat(d.value) || 0;
+        <button class="limpar" onclick="limparTudo()">
+            Limpar tudo
+        </button>
+    </div>
+
+    <div class="card">
+        <h2>📚 Aprenda a cuidar do seu dinheiro</h2>
+
+        <p>
+            Educação financeira é aprender a organizar o dinheiro,
+            controlar os gastos e fazer escolhas conscientes.
+            Quando você sabe quanto tem e quanto gasta,
+            consegue planejar melhor seu futuro.
+        </p>
+
+        <br>
+
+        <h3>Algumas dicas importantes:</h3>
+        <br>
+
+        <p>✅ Anote todos os seus gastos.</p>
+        <p>✅ Evite comprar coisas desnecessárias.</p>
+        <p>✅ Procure guardar uma parte do dinheiro.</p>
+        <p>✅ Pense antes de realizar uma compra.</p>
+        <p>✅ Organize seu orçamento.</p>
+    </div>
+
+</div>
+
+<footer>
+    Educação Financeira • Aprenda a cuidar do seu dinheiro © 2026
+</footer>
+
+<script>
+
+let dinheiro = 0;
+let gastos = [];
+
+function formatar(valor) {
+    return valor.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    });
+}
+
+function definirDinheiro() {
+
+    const campo = document.getElementById('dinheiro');
+    const valor = campo.value.trim();
+
+    if (valor === '' || !Number.isFinite(Number(valor)) || Number(valor) < 0) {
+        alert('Informe um valor válido!');
+        return;
+    }
+
+    dinheiro = Number(valor);
+
+    atualizarTela();
+    campo.value = '';
+
+}
+
+function adicionarGasto() {
+
+    const nome = document.getElementById('nomeGasto').value.trim();
+    const valor = Number(document.getElementById('valorGasto').value);
+
+    if (nome === '') {
+        alert('Digite o nome do gasto!');
+        return;
+    }
+
+    if (
+        document.getElementById('valorGasto').value.trim() === '' ||
+        !Number.isFinite(valor) ||
+        valor <= 0
+    ) {
+        alert('Informe um valor válido para o gasto!');
+        return;
+    }
+
+    gastos.push({
+        id: Date.now() + Math.random(),
+        nome: nome,
+        valor: valor
+    });
+
+    document.getElementById('nomeGasto').value = '';
+    document.getElementById('valorGasto').value = '';
+
+    atualizarTela();
+}
+
+function excluirGasto(id) {
+
+    gastos = gastos.filter(gasto => gasto.id !== id);
+
+    atualizarTela();
+}
+
+function atualizarTela() {
+
+    let total = gastos.reduce((soma, gasto) => {
+        return soma + gasto.valor;
+    }, 0);
+
+    let saldo = dinheiro - total;
+
+    document.getElementById('totalDinheiro').textContent =
+        formatar(dinheiro);
+
+    document.getElementById('totalGastos').textContent =
+        formatar(total);
+
+    document.getElementById('saldo').textContent =
+        formatar(saldo);
+
+    const lista = document.getElementById('listaGastos');
+
+    lista.innerHTML = '';
+
+    if (gastos.length === 0) {
+
+        lista.innerHTML =
+            '<p class="vazio">Nenhum gasto registrado ainda.</p>';
+
+    } else {
+
+        gastos.forEach(gasto => {
+
+            const item = document.createElement('div');
+            item.className = 'item';
+
+            const descricao = document.createElement('span');
+            descricao.textContent =
+                gasto.nome + ' - ' + formatar(gasto.valor);
+
+            const botao = document.createElement('button');
+            botao.className = 'excluir';
+            botao.textContent = 'Excluir';
+
+            botao.addEventListener('click', () => {
+                excluirGasto(gasto.id);
             });
 
-            const saldo = receita - totalDespesas;
+            item.appendChild(descricao);
+            item.appendChild(botao);
 
-            saldoEl.textContent = saldo.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-            });
+            lista.appendChild(item);
 
-            saldoEl.classList.remove('positive', 'negative');
-            if (saldo > 0) {
-                saldoEl.classList.add('positive');
-                statusEl.textContent = 'Saldo positivo. Há margem para reserva ou investimento.';
-            } else if (saldo < 0) {
-                saldoEl.classList.add('negative');
-                statusEl.textContent = 'Atenção: despesas superiores aos recursos disponíveis.';
-            } else {
-                statusEl.textContent = 'Saldo zerado. Despesas equivalentes aos recursos.';
-            }
+        });
 
-            if (receita === 0 && totalDespesas === 0) {
-                statusEl.textContent = 'Informe os valores para calcular';
-            }
-        }
+    }
 
-        function limpar() {
-            receitaInput.value = '';
-            despesas.forEach(d => d.value = '');
-            calcular();
-        }
+    const mensagem = document.getElementById('mensagem');
 
-        receitaInput.addEventListener('input', calcular);
-        despesas.forEach(d => d.addEventListener('input', calcular));
-        btnLimpar.addEventListener('click', limpar);
-    </script>
+    mensagem.classList.remove('alerta');
+
+    if (dinheiro === 0 && total === 0) {
+
+        mensagem.textContent =
+            'Informe quanto dinheiro você tem para começar.';
+
+    } else if (saldo < 0) {
+
+        mensagem.textContent =
+            '⚠️ Atenção! Você gastou mais do que tinha disponível!';
+
+        mensagem.classList.add('alerta');
+
+    } else if (saldo === 0) {
+
+        mensagem.textContent =
+            'Seu dinheiro acabou! Você utilizou todo o valor disponível.';
+
+        mensagem.classList.add('alerta');
+
+    } else {
+
+        mensagem.textContent =
+            '🎉 Muito bem! Você ainda tem ' + formatar(saldo) +
+            ' disponível.';
+
+    }
+
+}
+
+function limparTudo() {
+
+    const confirmar = confirm(
+        'Tem certeza que deseja apagar todos os dados?'
+    );
+
+    if (!confirmar) return;
+
+    dinheiro = 0;
+    gastos = [];
+
+    document.getElementById('dinheiro').value = '';
+    document.getElementById('nomeGasto').value = '';
+    document.getElementById('valorGasto').value = '';
+
+    atualizarTela();
+}
+
+</script>
+
 </body>
 </html>
+```
